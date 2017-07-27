@@ -21,7 +21,7 @@ set(foo_LINK_LIBRARIES
  ${SHIBOKEN_PYTHON_LIBRARIES}
  ${SHIBOKEN_LIBRARY}
  ${PYSIDE_LIBRARY}
- ${LIBFOO_DIR}/libfoo.so
+ ${LIBFOO_DIR}/build/libfoo.so
 )
 
 include_directories(foo ${foo_INCLUDE_DIRECTORIES})
