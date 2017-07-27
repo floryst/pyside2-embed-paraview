@@ -1,6 +1,12 @@
 #include <pqOptions.h>
 #include <pqPVApplicationCore.h>
 
+#include <pqAlwaysConnectedBehavior.h>
+#include <pqDefaultViewBehavior.h>
+#include <pqPersistentMainWindowStateBehavior.h>
+#include <pqViewStreamingBehavior.h>
+#include <pqApplicationCore.h>
+
 #include <vtkNew.h>
 #include <vtkObjectFactory.h>
 
@@ -40,6 +46,14 @@ MyWindow::MyWindow(QWidget *parent) :
     pvAppCore = new pqPVApplicationCore(argc, argv, options.Get());
 
     ui->setupUi(this);
+
+    new pqDefaultViewBehavior(this);
+    new pqAlwaysConnectedBehavior(this);
+    new pqViewStreamingBehavior(this);
+    new pqPersistentMainWindowStateBehavior(this);
+
+    // this will trigger the logic to setup reader/writer factories, etc.
+    pqApplicationCore::instance()->loadConfigurationXML("<xml/>");
 }
 
 MyWindow::~MyWindow()
