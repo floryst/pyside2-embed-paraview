@@ -24,6 +24,10 @@ class PyWindow(QWidget):
     def __init__(self):
         QWidget.__init__(self)
 
+        self.setupUi()
+        self.connectSlots()
+
+    def setupUi(self):
         self.setWindowTitle("PyWindow")
 
         self.layout = QVBoxLayout()
@@ -38,8 +42,6 @@ class PyWindow(QWidget):
         self.layout.addWidget(self.fooWindow)
 
         self.setLayout(self.layout)
-
-        self.connectSlots()
 
     def connectSlots(self):
         self.clickme.clicked.connect(self.onClickMe)
