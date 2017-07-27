@@ -17,6 +17,8 @@ from PySide2.QtWidgets import *
 from PySide2.QtGui import *
 import foo
 
+from paraview.simple import *
+
 class PyWindow(QWidget):
     def __init__(self):
         QWidget.__init__(self)
@@ -43,6 +45,7 @@ class PyWindow(QWidget):
     @Slot()
     def onClickMe(self):
         print 'Clicked'
+        print GetActiveView()
 
 app = QApplication(sys.argv)
 
