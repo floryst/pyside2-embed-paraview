@@ -27,6 +27,9 @@ endif()
 # Find the QtWidgets library
 find_package(Qt5Widgets REQUIRED)
 
+# find paraview
+find_package(ParaView REQUIRED)
+
 # Generate code from ui files
 qt5_wrap_ui(UI_HEADERS mywindow.ui)
 
