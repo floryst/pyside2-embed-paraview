@@ -1,20 +1,20 @@
 #include "foo.h"
 
-Math::Math(QWidget *parent) :
+MyWindow::MyWindow(QWidget *parent) :
     QMainWindow(parent)
 {
 }
 
-Math::~Math()
+MyWindow::~MyWindow()
 {
 }
 
-void Math::on_actionExit_triggered()
+void MyWindow::on_actionExit_triggered()
 {
     this->close();
 }
 
-int Math::squared(int x)
+int MyWindow::squared(int x)
 {
   return x * x;
 }

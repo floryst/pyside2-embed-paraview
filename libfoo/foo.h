@@ -4,13 +4,13 @@
 #include <QtCore>
 #include <QMainWindow>
 
-class Math : public QMainWindow
+class MyWindow : public QMainWindow
 {
   Q_OBJECT
 
 public:
-    explicit Math(QWidget* parent = 0);
-    ~Math();
+    explicit MyWindow(QWidget* parent = 0);
+    ~MyWindow();
 
     int squared(int x);
 

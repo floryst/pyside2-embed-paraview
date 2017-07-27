@@ -2,7 +2,7 @@ project(foo)
 
 set(foo_SRC
  ${CMAKE_CURRENT_BINARY_DIR}/foo/foo_module_wrapper.cpp
- ${CMAKE_CURRENT_BINARY_DIR}/foo/math_wrapper.cpp
+ ${CMAKE_CURRENT_BINARY_DIR}/foo/mywindow_wrapper.cpp
 )
 
 set(PYSIDE2_INC /home/forrestli/py2env/pyside-setup/py2env2_install/py2.7-qt5.6.2-64bit-release/include/PySide2/)
