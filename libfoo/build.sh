@@ -22,4 +22,4 @@ mkdir -p $BUILDDIR && cd $BUILDDIR
 cmake \
   ..
 
-make
+make -j8
