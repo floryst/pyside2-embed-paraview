@@ -1,5 +1,17 @@
 import sys
+import os
 sys.path.append('.')
+
+# paraview paths
+HOME = os.environ.get('HOME', '.')
+for path in [
+    # relative to HOME
+    'tomviz/build/paraview-qt_5_6_2/lib/site-packages/',
+    # needed for vtkCommonCorePython module
+    'tomviz/build/paraview-qt_5_6_2/lib/',
+]:
+    sys.path.append(os.path.join(HOME, path))
+
 from PySide2.QtWidgets import *
 from PySide2.QtGui import *
 import foo
