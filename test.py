@@ -31,6 +31,7 @@ class PyWindow(QWidget):
         self.clickme = QPushButton("Click me!", self)
         self.layout.addWidget(self.clickme)
 
+        # this takes ~2 sec to load...
         self.fooWindow = foo.Goba.MyWindow()
         # 0 == Qt::Widget
         self.fooWindow.setWindowFlags(0)
@@ -45,7 +46,6 @@ class PyWindow(QWidget):
 
     @Slot()
     def onClickMe(self):
-        print 'Clicked'
         print GetActiveView()
 
 app = QApplication(sys.argv)
