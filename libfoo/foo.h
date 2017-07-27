@@ -22,9 +22,6 @@ public:
 
     int squared(int x);
 
-private slots:
-  void on_actionExit_triggered();
-
 private:
     Ui::MyWindow *ui;
 
