@@ -4,6 +4,10 @@
 #include <QtCore>
 #include <QMainWindow>
 
+namespace Ui {
+class MyWindow;
+}
+
 class MyWindow : public QMainWindow
 {
   Q_OBJECT
@@ -16,5 +20,8 @@ public:
 
 private slots:
   void on_actionExit_triggered();
+
+private:
+    Ui::MyWindow *ui;
 };
 #endif

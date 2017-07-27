@@ -28,14 +28,14 @@ endif()
 find_package(Qt5Widgets REQUIRED)
 
 # Generate code from ui files
-#qt5_wrap_ui(UI_HEADERS mainwindow.ui)
+qt5_wrap_ui(UI_HEADERS mywindow.ui)
 
 # Generate rules for building source files from the resources
-#qt5_add_resources(QRCS resources.qrc)
+qt5_add_resources(QRCS resources.qrc)
 
 # Tell CMake to create the helloworld executable
 #add_executable(helloworld main.cpp mainwindow.cpp ${UI_HEADERS} ${QRCS})
-add_library(foo SHARED foo.cpp)
+add_library(foo SHARED foo.cpp ${UI_HEADERS} ${QSRCS})
 
 # Add the Qt5 Widgets for linking
 target_link_libraries(foo Qt5::Widgets)
