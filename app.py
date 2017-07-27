@@ -94,9 +94,10 @@ class PyWindow(QWidget):
             Show(self.sphere)
             Render()
 
-app = QApplication(sys.argv)
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
 
-pyWindow = PyWindow()
-pyWindow.show()
+    pyWindow = PyWindow()
+    pyWindow.show()
 
-app.exec_()
+    app.exec_()
