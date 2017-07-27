@@ -1,10 +1,9 @@
 import sys
 import os
 
-# paraview paths
 HOME = os.environ.get('HOME', '.')
 for path in [
-    # relative to HOME
+    # paraview
     'tomviz/build/paraview-qt_5_6_2/lib/site-packages/',
     # needed for vtkCommonCorePython module
     'tomviz/build/paraview-qt_5_6_2/lib/',
