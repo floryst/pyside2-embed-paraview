@@ -57,6 +57,7 @@ class PyWindow(QWidget):
 
     def setupUi(self):
         self.setWindowTitle("PyWindow")
+        self.resize(1024, 768)
 
         self.layout = QVBoxLayout()
 
