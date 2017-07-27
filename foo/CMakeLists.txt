@@ -9,6 +9,9 @@ set(PYSIDE2_INC /home/forrestli/py2env/pyside-setup/py2env2_install/py2.7-qt5.6.
 
 
 set(foo_INCLUDE_DIRECTORIES
+ ${PYSIDE2_INC}
+ ${PYSIDE2_INC}/QtGui
+ ${PYSIDE2_INC}/QtWidgets
  ${SHIBOKEN_INCLUDE_DIR}
  ${PYTHON_INCLUDE_PATH}
  ${PYSIDE_INCLUDE_DIR}
