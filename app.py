@@ -31,15 +31,19 @@ class PyWindow(QWidget):
             self.callbacks = defaultdict(list)
 
             self.events = [
-                'LeftButtonPressEvent',
+                ('LeftButtonPressEvent', self.OnLeftButtonDown),
             ]
-            for event in self.events:
-                self.AddObserver(event, self._makeCallbackHook(event))
+            for event, defaultCb in self.events:
+                self.AddObserver(event,
+                        self._makeCallbackHook(event, defaultCb))
 
-        def _makeCallbackHook(self, hook):
+        def _makeCallbackHook(self, hook, defaultCallback):
             def callback(obj, event):
-                for cb in self.callbacks['LeftButtonPressEvent']:
+                for cb in self.callbacks[hook]:
                     cb(obj, event)
+
+                # forward events to default callback
+                defaultCallback()
             return callback
 
     def __init__(self):
