@@ -12,6 +12,7 @@ for path in [
 ]:
     sys.path.append(os.path.join(HOME, path))
 
+from PySide2.QtCore import Slot
 from PySide2.QtWidgets import *
 from PySide2.QtGui import *
 import foo
@@ -24,8 +25,8 @@ class PyWindow(QWidget):
 
         self.layout = QVBoxLayout()
 
-        label = QLabel("hello")
-        self.layout.addWidget(label)
+        self.clickme = QPushButton("Click me!", self)
+        self.layout.addWidget(self.clickme)
 
         self.fooWindow = foo.Goba.MyWindow()
         # 0 == Qt::Widget
@@ -33,6 +34,15 @@ class PyWindow(QWidget):
         self.layout.addWidget(self.fooWindow)
 
         self.setLayout(self.layout)
+
+        self.connectSlots()
+
+    def connectSlots(self):
+        self.clickme.clicked.connect(self.onClickMe)
+
+    @Slot()
+    def onClickMe(self):
+        print 'Clicked'
 
 app = QApplication(sys.argv)
 
