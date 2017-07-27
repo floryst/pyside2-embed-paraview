@@ -33,9 +33,12 @@ qt5_wrap_ui(UI_HEADERS mywindow.ui)
 # Generate rules for building source files from the resources
 qt5_add_resources(QRCS resources.qrc)
 
-# Tell CMake to create the helloworld executable
-#add_executable(helloworld main.cpp mainwindow.cpp ${UI_HEADERS} ${QRCS})
+# create the runner executable
+add_executable(runner main.cpp foo.cpp ${UI_HEADERS} ${QRCS})
+
+# library
 add_library(foo SHARED foo.cpp ${UI_HEADERS} ${QSRCS})
 
 # Add the Qt5 Widgets for linking
+target_link_libraries(runner Qt5::Widgets)
 target_link_libraries(foo Qt5::Widgets)
