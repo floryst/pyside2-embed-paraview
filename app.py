@@ -13,14 +13,35 @@ for path in [
 ]:
     sys.path.append(os.path.join(HOME, path))
 
+from collections import defaultdict
+
 from PySide2.QtCore import Slot
 from PySide2.QtWidgets import *
 from PySide2.QtGui import *
 import foo
 
+import vtk
 from paraview.simple import *
 
 class PyWindow(QWidget):
+
+    class InteractorStyle(vtk.vtkInteractorStyleTrackballCamera):
+        def __init__(self, parent, *args, **kwargs):
+            self.parent = parent
+            self.callbacks = defaultdict(list)
+
+            self.events = [
+                'LeftButtonPressEvent',
+            ]
+            for event in self.events:
+                self.AddObserver(event, self._makeCallbackHook(event))
+
+        def _makeCallbackHook(self, hook):
+            def callback(obj, event):
+                for cb in self.callbacks['LeftButtonPressEvent']:
+                    cb(obj, event)
+            return callback
+
     def __init__(self):
         QWidget.__init__(self)
 
@@ -28,6 +49,8 @@ class PyWindow(QWidget):
 
         self.setupUi()
         self.connectSlots()
+
+        self.setupPVHandlers()
 
     def setupUi(self):
         self.setWindowTitle("PyWindow")
@@ -47,6 +70,17 @@ class PyWindow(QWidget):
 
     def connectSlots(self):
         self.clickme.clicked.connect(self.onClickMe)
+
+    def setupPVHandlers(self):
+        view = GetActiveView()
+        # Hm, probably should use GetViewOrCreate
+        if not view:
+            raise Exception('No available paraview view!')
+
+        interactor = view.GetInteractor()
+        interactor.SetPicker(vtk.vtkCellPicker())
+        self.interactorStyle = self.InteractorStyle(self)
+        interactor.SetInteractorStyle(self.interactorStyle)
 
     @Slot()
     def onClickMe(self):
