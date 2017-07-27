@@ -8,6 +8,8 @@ namespace Ui {
 class MyWindow;
 }
 
+namespace Goba {
+
 class MyWindow : public QMainWindow
 {
   Q_OBJECT
@@ -24,4 +26,6 @@ private slots:
 private:
     Ui::MyWindow *ui;
 };
+
+}
 #endif

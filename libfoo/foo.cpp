@@ -1,6 +1,8 @@
 #include "foo.h"
 #include "ui_mywindow.h"
 
+namespace Goba {
+
 MyWindow::MyWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MyWindow)
@@ -21,4 +23,6 @@ void MyWindow::on_actionExit_triggered()
 int MyWindow::squared(int x)
 {
   return x * x;
+}
+
 }

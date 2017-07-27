@@ -3,5 +3,7 @@
   <load-typesystem name="typesystem_core.xml" generate="no" />
   <load-typesystem name="typesystem_gui_common.xml" generate="no" />
   <load-typesystem name="typesystem_widgets_common.xml" generate="no" />
-  <object-type name="MyWindow" />
+  <namespace-type name="Goba" generate="yes">
+    <object-type name="MyWindow" />
+  </namespace-type>
 </typesystem>
