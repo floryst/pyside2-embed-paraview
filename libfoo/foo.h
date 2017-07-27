@@ -1,6 +1,7 @@
 #ifndef _FOO_H
 #define _FOO_H
 
+#include <QtCore>
 #include <QMainWindow>
 
 class Math : public QMainWindow
