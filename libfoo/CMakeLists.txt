@@ -119,5 +119,5 @@ add_executable(runner main.cpp foo.cpp ${UI_HEADERS} ${QRCS})
 add_library(foo SHARED foo.cpp ${UI_HEADERS} ${QSRCS})
 
 # Add the Qt5 Widgets for linking
-target_link_libraries(runner Qt5::Widgets ${OPENGL_LIBRARIES})
 target_link_libraries(foo Qt5::Widgets ${OPENGL_LIBRARIES})
+target_link_libraries(runner foo)
