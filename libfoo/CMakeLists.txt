@@ -118,6 +118,13 @@ add_executable(runner main.cpp foo.cpp ${UI_HEADERS} ${QRCS})
 # library
 add_library(foo SHARED foo.cpp ${UI_HEADERS} ${QSRCS})
 
-# Add the Qt5 Widgets for linking
-target_link_libraries(foo Qt5::Widgets ${OPENGL_LIBRARIES})
+# Add the libraries to link against libfoo
+target_link_libraries(foo 
+  PUBLIC
+    Qt5::Widgets
+    ${OPENGL_LIBRARIES}
+    pqApplicationComponents
+    vtkPVServerManagerRendering
+    vtkglew)
+
 target_link_libraries(runner foo)
