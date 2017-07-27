@@ -10,6 +10,12 @@ export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:$PARAVIEW_ROOT/lib/cmake/
 export PATH=$PARAVIEW_ROOT/bin:${PATH}
 export LD_LIBRARY_PATH=$PARAVIEW_ROOT/lib/:${LD_LIBRARY_PATH}
 
+# this is from itktubetk
+ITK_ROOT=$HOME/tomviz/build/ITKTubeTK/ITK-build/
+export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:$ITK_ROOT/lib/cmake
+export PATH=$ITK_ROOT/bin:${PATH}
+export LD_LIBRARY_PATH=$ITK_ROOT/lib/:${LD_LIBRARY_PATH}
+
 BUILDDIR=$PWD/build
 mkdir -p $BUILDDIR && cd $BUILDDIR
 
