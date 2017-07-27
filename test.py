@@ -1,6 +1,5 @@
 import sys
 import os
-sys.path.append('.')
 
 # paraview paths
 HOME = os.environ.get('HOME', '.')
@@ -9,6 +8,8 @@ for path in [
     'tomviz/build/paraview-qt_5_6_2/lib/site-packages/',
     # needed for vtkCommonCorePython module
     'tomviz/build/paraview-qt_5_6_2/lib/',
+    # for foo module
+    'py2env/hello/build/foo',
 ]:
     sys.path.append(os.path.join(HOME, path))
 
