@@ -8,6 +8,8 @@ namespace Ui {
 class MyWindow;
 }
 
+class pqPVApplicationCore;
+
 namespace Goba {
 
 class MyWindow : public QMainWindow
@@ -25,6 +27,8 @@ private slots:
 
 private:
     Ui::MyWindow *ui;
+
+    pqPVApplicationCore* pvAppCore;
 };
 
 }
