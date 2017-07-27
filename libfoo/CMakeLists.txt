@@ -30,6 +30,9 @@ find_package(Qt5Widgets REQUIRED)
 # find paraview
 find_package(ParaView REQUIRED)
 
+# find opengl
+find_package(OpenGL REQUIRED)
+
 ## PARAVIEW/ITK
 
 if(NOT PARAVIEW_BUILD_QT_GUI)
@@ -99,6 +102,10 @@ endif()
 
 ## END PARAVIEW/ITK
 
+include_directories(SYSTEM
+  ${Qt5Widgets_INCLUDE_DIRS}
+  ${PARAVIEW_INCLUDE_DIRS})
+
 # Generate code from ui files
 qt5_wrap_ui(UI_HEADERS mywindow.ui)
 
@@ -112,5 +119,5 @@ add_executable(runner main.cpp foo.cpp ${UI_HEADERS} ${QRCS})
 add_library(foo SHARED foo.cpp ${UI_HEADERS} ${QSRCS})
 
 # Add the Qt5 Widgets for linking
-target_link_libraries(runner Qt5::Widgets)
-target_link_libraries(foo Qt5::Widgets)
+target_link_libraries(runner Qt5::Widgets ${OPENGL_LIBRARIES})
+target_link_libraries(foo Qt5::Widgets ${OPENGL_LIBRARIES})
