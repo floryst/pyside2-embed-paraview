@@ -5,6 +5,9 @@ set(foo_SRC
  ${CMAKE_CURRENT_BINARY_DIR}/foo/math_wrapper.cpp
 )
 
+set(PYSIDE2_INC /home/forrestli/py2env/pyside-setup/py2env2_install/py2.7-qt5.6.2-64bit-release/include/PySide2/)
+
+
 set(foo_INCLUDE_DIRECTORIES
  ${SHIBOKEN_INCLUDE_DIR}
  ${PYTHON_INCLUDE_PATH}
@@ -43,7 +46,7 @@ set(QTWIDG_INC /opt/Qt5.6.2/5.6/gcc_64/include/QtWidgets/)
 add_custom_command(OUTPUT ${foo_SRC}
  COMMAND ${GENERATOR}
  --generator-set=shiboken --enable-parent-ctor-heuristic --enable-pyside-extensions --enable-return-value-heuristic --avoid-protected-hack
- --include-paths=${QTCORE_INC}:${QTWIDG_INC}:${LIBFOO_DIR}:/home/forrestli/py2env/pyside-setup/py2env2_install/py2.7-qt5.6.2-64bit-release/include/PySide2/
+ --include-paths=${QTCORE_INC}:${QTWIDG_INC}:${LIBFOO_DIR}:${PYSIDE2_INC}
  --typesystem-paths=${PYSIDE_TYPESYSTEMS}
  --output-directory=${CMAKE_CURRENT_BINARY_DIR}
  ${CMAKE_SOURCE_DIR}/foo/global.h
