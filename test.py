@@ -24,6 +24,8 @@ class PyWindow(QWidget):
     def __init__(self):
         QWidget.__init__(self)
 
+        self.sphere = None
+
         self.setupUi()
         self.connectSlots()
 
@@ -48,7 +50,12 @@ class PyWindow(QWidget):
 
     @Slot()
     def onClickMe(self):
-        print GetActiveView()
+        if self.sphere is None:
+            self.sphere = Sphere()
+            self.sphere.Radius = 22
+
+            Show(self.sphere)
+            Render()
 
 app = QApplication(sys.argv)
 
