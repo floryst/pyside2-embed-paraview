@@ -28,7 +28,7 @@ set(foo_LINK_LIBRARIES
  ${SHIBOKEN_PYTHON_LIBRARIES}
  ${SHIBOKEN_LIBRARY}
  ${PYSIDE_LIBRARY}
- ${LIBFOO_DIR}/build/libfoo.so
+ ${CMAKE_BINARY_DIR}/libfoo/libfoo.so
 )
 
 include_directories(foo ${foo_INCLUDE_DIRECTORIES})

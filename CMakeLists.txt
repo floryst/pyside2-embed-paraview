@@ -43,4 +43,8 @@ endif()
 # https://stackoverflow.com/questions/28252909/cmake-and-qt5-include-only-takes-one-argument
 #include(${QT_USE_FILE})
 
+add_subdirectory(libfoo)
 add_subdirectory(foo)
+
+# build libfoo before foo
+add_dependencies(foo libfoo)

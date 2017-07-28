@@ -116,10 +116,11 @@ qt5_add_resources(QRCS resources.qrc)
 add_executable(runner main.cpp foo.cpp ${UI_HEADERS} ${QRCS})
 
 # library
-add_library(foo SHARED foo.cpp ${UI_HEADERS} ${QSRCS})
+add_library(libfoo SHARED foo.cpp ${UI_HEADERS} ${QSRCS})
+set_target_properties(libfoo PROPERTIES PREFIX "")
 
 # Add the libraries to link against libfoo
-target_link_libraries(foo 
+target_link_libraries(libfoo
   PUBLIC
     Qt5::Widgets
     ${OPENGL_LIBRARIES}
@@ -127,4 +128,4 @@ target_link_libraries(foo
     vtkPVServerManagerRendering
     vtkglew)
 
-target_link_libraries(runner foo)
+target_link_libraries(runner libfoo)
