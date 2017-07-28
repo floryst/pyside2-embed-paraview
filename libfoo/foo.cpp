@@ -6,6 +6,9 @@
 #include <pqPersistentMainWindowStateBehavior.h>
 #include <pqViewStreamingBehavior.h>
 #include <pqApplicationCore.h>
+#include <pqStandardViewFrameActionsImplementation.h>
+#include <pqStandardPropertyWidgetInterface.h>
+#include <pqInterfaceTracker.h>
 
 #include <vtkNew.h>
 #include <vtkObjectFactory.h>
@@ -46,6 +49,10 @@ MyWindow::MyWindow(QWidget *parent) :
     pvAppCore = new pqPVApplicationCore(argc, argv, options.Get());
 
     ui->setupUi(this);
+
+    auto pgm = pvAppCore->interfaceTracker();
+    pgm->addInterface(new pqStandardPropertyWidgetInterface(pgm));
+    pgm->addInterface(new pqStandardViewFrameActionsImplementation(pgm));
 
     new pqDefaultViewBehavior(this);
     new pqAlwaysConnectedBehavior(this);
