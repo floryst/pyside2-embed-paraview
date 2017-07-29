@@ -126,11 +126,16 @@ This will install pyside2 and shiboken2 into
 
 ## pyside2-embed-paraview
 
-After cloning this repository, set up your environment like the following.
+libfoo is the C++ library that wraps Paraview.
+foo is the C++/Shiboken2 configuration sub-project for generating the Python
+wrapper.
+
+After cloning this repository, build `libfoo`.
 **You will need to look over each and every path to make sure they correspond
-to the installations on your machine.**
+to the installations on your machine.** A sample build script by the name
+`libfoo/build.sh` is provided, but does not have the correct paths.
 ```
-cd pyside2-embed-paraview/
+cd pyside2-embed-paraview/libfoo/
 mkdir build/ && cd build/
 
 # include qt5.6.2 modules
@@ -146,10 +151,16 @@ export LD_LIBRARY_PATH=$PARAVIEW_ROOT/lib/:${LD_LIBRARY_PATH}
 
 # include pyside2/shiboken2
 export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/path/to/pyside-setup/pyside2_install/py2.7-qt5.6.2-64bit-release/lib/cmake/
+
+cmake ..
+make -j4
 ```
 
-Once that's done, you can now configure and build.
+Once that's done, you can build `foo`. Again, a sample build script called
+`build-foo-bindings.sh` is provided, but paths must be changed appropriately.
 ```
+cd pyside2-embed-paraview/
+mkdir build && cd build
 cmake \
   -DGENERATOR=/path/to/pyside-setup/pyside2_install/py2.7-qt5.6.2-64bit-release/bin/shiboken2 \
   -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython2.7.so \
@@ -157,6 +168,9 @@ cmake \
   ..
 make -j4
 ```
+
+If all compiles, you should have a `foo.so` located in `build/foo/foo.so`. That
+is your python module!
 
 # Running
 
