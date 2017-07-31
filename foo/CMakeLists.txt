@@ -47,7 +47,7 @@ set(foo_LINK_LIBRARIES
 )
 
 include_directories(foo ${foo_INCLUDE_DIRECTORIES})
-add_library(foo MODULE ${foo_SRC})
+add_library(foo SHARED ${foo_SRC})
 set_property(TARGET foo PROPERTY PREFIX "")
 # need Qt5::Core so that #include <QDebug> works.
 # https://stackoverflow.com/questions/28252909/cmake-and-qt5-include-only-takes-one-argument
