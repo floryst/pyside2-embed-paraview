@@ -1,16 +1,15 @@
 import sys
 import os
 
-HOME = os.environ.get('HOME', '.')
 for path in [
-    # paraview
-    'tomviz/build/paraview-qt_5_6_2/lib/site-packages/',
     # needed for vtkCommonCorePython module
-    'tomviz/build/paraview-qt_5_6_2/lib/',
-    # for foo module
-    'py2env/hello/build/foo',
+    os.environ.get('PARAVIEW_LIB'),
+    # paraview python lib
+    os.path.join(os.environ.get('PARAVIEW_LIB'), 'site-packages'),
+    # foo module
+    os.environ.get('FOO_LIB'),
 ]:
-    sys.path.append(os.path.join(HOME, path))
+    sys.path.append(path)
 
 from collections import defaultdict
 
