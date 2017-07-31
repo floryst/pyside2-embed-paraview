@@ -1,5 +1,20 @@
 project(foo)
 
+find_package(PythonLibs REQUIRED)
+find_package(Shiboken2 REQUIRED)
+find_package(PySide2 REQUIRED)
+# Throws error: The Qt5 package requires at least one component
+# https://stackoverflow.com/questions/28247137/ubuntu-cmake-what-path-to-add-to-cmake-module-path
+# https://www.kdab.com/using-cmake-with-qt-5/
+#find_package(Qt5 5.6.2 REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Core REQUIRED)
+
+find_program(GENERATOR generatorrunner REQUIRED)
+if (NOT GENERATOR)
+ message(FATAL_ERROR "You need to specify GENERATOR variable (-DGENERATOR=value)")
+endif()
+
 set(foo_SRC
  ${CMAKE_CURRENT_BINARY_DIR}/foo/foo_module_wrapper.cpp
  ${CMAKE_CURRENT_BINARY_DIR}/foo/goba_wrapper.cpp
