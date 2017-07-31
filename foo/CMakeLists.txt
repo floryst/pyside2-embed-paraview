@@ -58,9 +58,6 @@ add_library(foo SHARED ${foo_SRC})
 set_property(TARGET foo PROPERTY PREFIX "")
 target_link_libraries(foo ${foo_LINK_LIBRARIES})
 
-string (REPLACE " " ":" QTCORE_INC ${Qt5Core_INCLUDE_DIRS})
-string (REPLACE " " ":" QTWIDG_INC ${Qt5Widgets_INCLUDE_DIRS})
-
 set(QTCORE_INC ${QT5_DIR}/include/QtCore/)
 set(QTWIDG_INC ${QT5_DIR}/include/QtWidgets/)
 
