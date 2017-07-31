@@ -131,12 +131,12 @@ libfoo is the C++ library that wraps Paraview.
 foo is the C++/Shiboken2 configuration sub-project for generating the Python
 wrapper.
 
-After cloning this repository, build `libfoo`.
+After cloning this repository, build the project.
 **You will need to look over each and every path to make sure they correspond
 to the installations on your machine.** A sample build script by the name
 `libfoo/build.sh` is provided, but does not have the correct paths.
 ```
-cd pyside2-embed-paraview/libfoo/
+cd pyside2-embed-paraview/
 mkdir build/ && cd build/
 
 # include qt5.6.2 modules
@@ -153,20 +153,12 @@ export LD_LIBRARY_PATH=$PARAVIEW_ROOT/lib/:${LD_LIBRARY_PATH}
 # include pyside2/shiboken2
 export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/path/to/pyside-setup/pyside2_install/py2.7-qt5.6.2-64bit-release/lib/cmake/
 
-cmake ..
-make -j4
-```
-
-Once that's done, you can build `foo`. Again, a sample build script called
-`build-foo-bindings.sh` is provided, but paths must be changed appropriately.
-```
-cd pyside2-embed-paraview/
-mkdir build && cd build
 cmake \
   -DGENERATOR=/path/to/pyside-setup/pyside2_install/py2.7-qt5.6.2-64bit-release/bin/shiboken2 \
   -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython2.7.so \
   -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 \
   ..
+
 make -j4
 ```
 
@@ -175,9 +167,14 @@ is your python module!
 
 # Running
 
-First export `LD_LIBRARY_PATH` to have the qt libs in your path:
+You will need to set a few environment variables. A sample run script is
+provided to demonstrate which variables need to be set.
 ```
 export LD_LIBRARY_PATH=/opt/Qt5.6.2/5.6/gcc_64/lib
+export PARAVIEW_LIB=$HOME/ParaView/build/lib/
+export FOO_LIB=/path/to/pyside2-embed-paraview/build/foo/
+
+python app.py
 ```
 
 Now you can run the app!
