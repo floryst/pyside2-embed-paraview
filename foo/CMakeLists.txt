@@ -6,7 +6,7 @@ set(foo_SRC
  ${CMAKE_CURRENT_BINARY_DIR}/foo/goba_mywindow_wrapper.cpp
 )
 
-set(PYSIDE2_INC /home/forrestli/py2env/pyside-setup/py2env2_install/py2.7-qt5.6.2-64bit-release/include/PySide2/)
+set(PYSIDE2_INC ${PYSIDE_DIR}/include/PySide2/)
 
 
 set(foo_INCLUDE_DIRECTORIES
@@ -44,8 +44,8 @@ target_link_libraries(foo Qt5::Core Qt5::Widgets ${foo_LINK_LIBRARIES})
 string (REPLACE " " ":" QTCORE_INC ${Qt5Core_INCLUDE_DIRS})
 string (REPLACE " " ":" QTWIDG_INC ${Qt5Widgets_INCLUDE_DIRS})
 
-set(QTCORE_INC /opt/Qt5.6.2/5.6/gcc_64/include/QtCore/)
-set(QTWIDG_INC /opt/Qt5.6.2/5.6/gcc_64/include/QtWidgets/)
+set(QTCORE_INC ${QT5_DIR}/include/QtCore/)
+set(QTWIDG_INC ${QT5_DIR}/include/QtWidgets/)
 
 add_custom_command(OUTPUT ${foo_SRC}
  COMMAND ${GENERATOR}
