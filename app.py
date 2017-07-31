@@ -1,5 +1,7 @@
 import sys
 import os
+import signal
+signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 for path in [
     # needed for vtkCommonCorePython module
