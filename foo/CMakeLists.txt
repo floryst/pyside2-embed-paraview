@@ -1,12 +1,27 @@
 project(foo)
 
+find_package(PythonLibs REQUIRED)
+find_package(Shiboken2 REQUIRED)
+find_package(PySide2 REQUIRED)
+# Throws error: The Qt5 package requires at least one component
+# https://stackoverflow.com/questions/28247137/ubuntu-cmake-what-path-to-add-to-cmake-module-path
+# https://www.kdab.com/using-cmake-with-qt-5/
+#find_package(Qt5 5.6.2 REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Core REQUIRED)
+
+find_program(GENERATOR generatorrunner REQUIRED)
+if (NOT GENERATOR)
+ message(FATAL_ERROR "You need to specify GENERATOR variable (-DGENERATOR=value)")
+endif()
+
 set(foo_SRC
  ${CMAKE_CURRENT_BINARY_DIR}/foo/foo_module_wrapper.cpp
  ${CMAKE_CURRENT_BINARY_DIR}/foo/goba_wrapper.cpp
  ${CMAKE_CURRENT_BINARY_DIR}/foo/goba_mywindow_wrapper.cpp
 )
 
-set(PYSIDE2_INC /home/forrestli/py2env/pyside-setup/py2env2_install/py2.7-qt5.6.2-64bit-release/include/PySide2/)
+set(PYSIDE2_INC ${PYSIDE_DIR}/include/PySide2/)
 
 
 set(foo_INCLUDE_DIRECTORIES
@@ -23,29 +38,28 @@ set(foo_INCLUDE_DIRECTORIES
 )
 
 set(foo_LINK_LIBRARIES
-# obsoleted by Qt5
- #${QT_QTCORE_LIBRARY}
- ${SHIBOKEN_PYTHON_LIBRARIES}
- ${SHIBOKEN_LIBRARY}
- ${PYSIDE_LIBRARY}
- ${LIBFOO_DIR}/build/libfoo.so
-)
-
-include_directories(foo ${foo_INCLUDE_DIRECTORIES})
-add_library(foo MODULE ${foo_SRC})
-set_property(TARGET foo PROPERTY PREFIX "")
 # need Qt5::Core so that #include <QDebug> works.
 # https://stackoverflow.com/questions/28252909/cmake-and-qt5-include-only-takes-one-argument
 # The QDebug class documentation shows that qmake requires core:
 #    "QT += core"
 #   From: http://doc.qt.io/qt-5/qdebug.html
-target_link_libraries(foo Qt5::Core Qt5::Widgets ${foo_LINK_LIBRARIES})
+ Qt5::Core
+ Qt5::Widgets
+ # obsoleted by Qt5
+ #${QT_QTCORE_LIBRARY}
+ ${SHIBOKEN_PYTHON_LIBRARIES}
+ ${SHIBOKEN_LIBRARY}
+ ${PYSIDE_LIBRARY}
+ libfoo
+)
 
-string (REPLACE " " ":" QTCORE_INC ${Qt5Core_INCLUDE_DIRS})
-string (REPLACE " " ":" QTWIDG_INC ${Qt5Widgets_INCLUDE_DIRS})
+include_directories(foo ${foo_INCLUDE_DIRECTORIES})
+add_library(foo SHARED ${foo_SRC})
+set_property(TARGET foo PROPERTY PREFIX "")
+target_link_libraries(foo ${foo_LINK_LIBRARIES})
 
-set(QTCORE_INC /opt/Qt5.6.2/5.6/gcc_64/include/QtCore/)
-set(QTWIDG_INC /opt/Qt5.6.2/5.6/gcc_64/include/QtWidgets/)
+set(QTCORE_INC ${QT5_DIR}/include/QtCore/)
+set(QTWIDG_INC ${QT5_DIR}/include/QtWidgets/)
 
 add_custom_command(OUTPUT ${foo_SRC}
  COMMAND ${GENERATOR}
