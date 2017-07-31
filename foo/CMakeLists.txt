@@ -38,23 +38,25 @@ set(foo_INCLUDE_DIRECTORIES
 )
 
 set(foo_LINK_LIBRARIES
-# obsoleted by Qt5
- #${QT_QTCORE_LIBRARY}
- ${SHIBOKEN_PYTHON_LIBRARIES}
- ${SHIBOKEN_LIBRARY}
- ${PYSIDE_LIBRARY}
- ${CMAKE_BINARY_DIR}/libfoo/libfoo.so
-)
-
-include_directories(foo ${foo_INCLUDE_DIRECTORIES})
-add_library(foo SHARED ${foo_SRC})
-set_property(TARGET foo PROPERTY PREFIX "")
 # need Qt5::Core so that #include <QDebug> works.
 # https://stackoverflow.com/questions/28252909/cmake-and-qt5-include-only-takes-one-argument
 # The QDebug class documentation shows that qmake requires core:
 #    "QT += core"
 #   From: http://doc.qt.io/qt-5/qdebug.html
-target_link_libraries(foo Qt5::Core Qt5::Widgets ${foo_LINK_LIBRARIES})
+ Qt5::Core
+ Qt5::Widgets
+ # obsoleted by Qt5
+ #${QT_QTCORE_LIBRARY}
+ ${SHIBOKEN_PYTHON_LIBRARIES}
+ ${SHIBOKEN_LIBRARY}
+ ${PYSIDE_LIBRARY}
+ libfoo
+)
+
+include_directories(foo ${foo_INCLUDE_DIRECTORIES})
+add_library(foo SHARED ${foo_SRC})
+set_property(TARGET foo PROPERTY PREFIX "")
+target_link_libraries(foo ${foo_LINK_LIBRARIES})
 
 string (REPLACE " " ":" QTCORE_INC ${Qt5Core_INCLUDE_DIRS})
 string (REPLACE " " ":" QTWIDG_INC ${Qt5Widgets_INCLUDE_DIRS})
