@@ -110,6 +110,7 @@ Once you have the git repo cloned, a few modifcations are required to support
 Qt 5.6.
 ```
 cd pyside-setup/
+git checkout 5.6
 cd sources/pyside2-tools && git checkout 5.6 && cd ../../
 cd sources/pyside2-examples && git checkout 5.6 && cd ../../
 ```
