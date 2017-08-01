@@ -107,6 +107,12 @@ class PyWindow(QWidget):
         print servermanager.ActiveConnection
         print GetActiveView()
 
+        # delete current sphere, if any
+        if self.sphere:
+            Delete(self.sphere)
+            Render()
+            self.sphere = None
+
         conn = Connect("localhost", 11111)
         servermanager.SetActiveConnection(conn)
         serverViews = servermanager.GetRenderViews(conn)
