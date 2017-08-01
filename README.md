@@ -7,9 +7,8 @@ Paraview/Python interface.
 
 Technologies used, and a brief explanation along with them.
 
-- Qt 5.6.2
-  - Currently the only tested Qt version. Latest Qt 5.9 might work, but has not
-    been tested.
+- Qt 5.9.1
+  - Also tested with Qt 5.6.2.
 - Python 2.7
   - The desired target is 2.7, but I am interested in exploring Python 3.5+
     support.
@@ -26,14 +25,14 @@ all packages.
 
 First and foremost, install cmake!
 
-## Qt 5.6.2
+## Qt 5.9.1
 
-Download Qt 5.6.2 from the
-[official Qt website](https://download.qt.io/official_releases/qt/5.6/5.6.2/).
+Download Qt 5.9.1 from the
+[official Qt website](https://download.qt.io/official_releases/qt/5.9/5.9.1/).
 Run the installer, and note your installation path.
 
 The remainder of this document will assume a Qt installation directory of
-`/opt/Qt5.6.2/`. This makes the Qt root directory `/opt/Qt5.6.2/5.6/gcc_64`.
+`/opt/Qt5.9.1/`. This makes the Qt root directory `/opt/Qt5.9.1/5.9.1/gcc_64`.
 
 ## ParaView
 
@@ -52,11 +51,11 @@ Get Paraview from the [Github repository](https://github.com/kitware/paraview).
 git clone --recursive https://github.com/Kitware/ParaView.git
 ```
 
-Build paraview against Qt 5.6.2 and Python 2.7 as follows:
+Build paraview against Qt 5.9.1 and Python 2.7 as follows:
 ```
-export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/Qt5.6.2/5.6/gcc_64/lib/cmake/
-export PATH=/opt/Qt5.6.2/5.6/gcc_64/bin/:${PATH}
-export LD_LIBRARY_PATH=/opt/Qt5.6.2/5.6/gcc_64/lib/:${LD_LIBRARY_PATH}
+export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/Qt5.9.1/5.9.1/gcc_64/lib/cmake/
+export PATH=/opt/Qt5.9.1/5.9.1/gcc_64/bin/:${PATH}
+export LD_LIBRARY_PATH=/opt/Qt5.9.1/5.9.1/gcc_64/lib/:${LD_LIBRARY_PATH}
 
 mkdir ParaView/build && cd ParaView/ 
 
@@ -107,23 +106,23 @@ pip install sphinx
 ```
 
 Once you have the git repo cloned, a few modifcations are required to support
-Qt 5.6.
+Qt 5.9.
 ```
 cd pyside-setup/
-git checkout 5.6
-cd sources/pyside2-tools && git checkout 5.6 && cd ../../
-cd sources/pyside2-examples && git checkout 5.6 && cd ../../
+git checkout 5.9
+cd sources/pyside2-tools && git checkout 5.9 && cd ../../
+cd sources/pyside2-examples && git checkout 5.9 && cd ../../
 ```
 
 Now compile!
 ```
 export MAKEFLAGS='-j4'
 export CXXFLAGS='-std=c++11'
-python setup.py install --qmake=/opt/Qt5.6.2/5.6/gcc_64/bin/qmake --reuse-build --ignore-git
+python setup.py install --qmake=/opt/Qt5.9.1/5.9.1/gcc_64/bin/qmake --reuse-build --ignore-git
 ```
 
 This will install pyside2 and shiboken2 into
-`/path/to/pyside-setup/pyside2_install/py2.7-qt5.6.2-64bit-release/`.
+`/path/to/pyside-setup/pyside2_install/py2.7-qt5.9.1-64bit-release/`.
 
 ## pyside2-embed-paraview
 
@@ -139,10 +138,10 @@ to the installations on your machine.** A sample build script by the name
 cd pyside2-embed-paraview/
 mkdir build/ && cd build/
 
-# include qt5.6.2 modules
-export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/Qt5.6.2/5.6/gcc_64/lib/cmake/
-export PATH=/opt/Qt5.6.2/5.6/gcc_64/bin/:${PATH}
-export LD_LIBRARY_PATH=/opt/Qt5.6.2/5.6/gcc_64/lib/:${LD_LIBRARY_PATH}
+# include qt5.9.1 modules
+export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/Qt5.9.1/5.9.1/gcc_64/lib/cmake/
+export PATH=/opt/Qt5.9.1/5.9.1/gcc_64/bin/:${PATH}
+export LD_LIBRARY_PATH=/opt/Qt5.9.1/5.9.1/gcc_64/lib/:${LD_LIBRARY_PATH}
 
 # include paraview
 PARAVIEW_ROOT=$HOME/ParaView/build/
@@ -151,10 +150,10 @@ export PATH=$PARAVIEW_ROOT/bin:${PATH}
 export LD_LIBRARY_PATH=$PARAVIEW_ROOT/lib/:${LD_LIBRARY_PATH}
 
 # include pyside2/shiboken2
-export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/path/to/pyside-setup/pyside2_install/py2.7-qt5.6.2-64bit-release/lib/cmake/
+export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/path/to/pyside-setup/pyside2_install/py2.7-qt5.9.1-64bit-release/lib/cmake/
 
 cmake \
-  -DGENERATOR=/path/to/pyside-setup/pyside2_install/py2.7-qt5.6.2-64bit-release/bin/shiboken2 \
+  -DGENERATOR=/path/to/pyside-setup/pyside2_install/py2.7-qt5.9.1-64bit-release/bin/shiboken2 \
   -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython2.7.so \
   -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 \
   ..
@@ -170,7 +169,7 @@ is your python module!
 You will need to set a few environment variables. A sample run script is
 provided to demonstrate which variables need to be set.
 ```
-export LD_LIBRARY_PATH=/opt/Qt5.6.2/5.6/gcc_64/lib
+export LD_LIBRARY_PATH=/opt/Qt5.9.1/5.9.1/gcc_64/lib
 export PARAVIEW_LIB=$HOME/ParaView/build/lib/
 export FOO_LIB=/path/to/pyside2-embed-paraview/build/foo/
 
