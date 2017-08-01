@@ -58,13 +58,12 @@ add_library(foo SHARED ${foo_SRC})
 set_property(TARGET foo PROPERTY PREFIX "")
 target_link_libraries(foo ${foo_LINK_LIBRARIES})
 
-set(QTCORE_INC ${QT5_DIR}/include/QtCore/)
-set(QTWIDG_INC ${QT5_DIR}/include/QtWidgets/)
+set(QT5_INC ${QT5_DIR}/include)
 
 add_custom_command(OUTPUT ${foo_SRC}
  COMMAND ${GENERATOR}
  --generator-set=shiboken --enable-parent-ctor-heuristic --enable-pyside-extensions --enable-return-value-heuristic --avoid-protected-hack
- --include-paths=${QTCORE_INC}:${QTWIDG_INC}:${LIBFOO_DIR}:${PYSIDE2_INC}
+ --include-paths=${QT5_INC}:${QT5_INC}/QtCore:${QT5_INC}/QtWidgets:${LIBFOO_DIR}:${PYSIDE2_INC}
  --typesystem-paths=${PYSIDE_TYPESYSTEMS}
  --output-directory=${CMAKE_CURRENT_BINARY_DIR}
  ${CMAKE_SOURCE_DIR}/foo/global.h
