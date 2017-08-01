@@ -84,6 +84,9 @@ time cmake --build . -- -j4
 
 Get `pyside-setup` from the git repo here:
 <http://code.qt.io/cgit/pyside/pyside-setup.git/>
+```
+git clone --recursive https://code.qt.io/pyside/pyside-setup.git
+```
 
 You will need to have a Clang version 3.9 or later along with any Clang
 development headers. Refer to the README.md for `pyside-setup` for more info.
