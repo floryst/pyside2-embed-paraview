@@ -62,7 +62,7 @@ set(QT5_INC ${QT5_DIR}/include)
 add_custom_command(OUTPUT ${foo_SRC}
  COMMAND ${GENERATOR}
  --generator-set=shiboken --enable-parent-ctor-heuristic --enable-pyside-extensions --enable-return-value-heuristic --avoid-protected-hack
- --include-paths=${QT5_INC}:${QT5_INC}/QtCore:${QT5_INC}/QtWidgets:${LIBFOO_DIR}:${PYSIDE2_INC}:${PYSIDE2_INC}/QtGui
+ --include-paths=${QT5_INC}:${QT5_INC}/QtCore:${QT5_INC}/QtWidgets:${LIBFOO_DIR}:${PYSIDE2_INC}:${PYSIDE2_INC}/QtGui:${PYSIDE_SRC}
  --typesystem-paths=${PYSIDE_TYPESYSTEMS}
  --output-directory=${CMAKE_CURRENT_BINARY_DIR}
  ${CMAKE_SOURCE_DIR}/foo/global.h
