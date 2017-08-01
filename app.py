@@ -22,6 +22,7 @@ import foo
 
 import vtk
 from paraview.simple import *
+from paraview import servermanager
 
 class PyWindow(QWidget):
 
@@ -65,6 +66,9 @@ class PyWindow(QWidget):
         self.clickme = QPushButton("Click me!", self)
         self.layout.addWidget(self.clickme)
 
+        self.btnConnectPVServer = QPushButton("Connect PV Server", self)
+        self.layout.addWidget(self.btnConnectPVServer)
+
         # this takes ~2 sec to load...
         self.fooWindow = foo.Goba.MyWindow()
         # 0 == Qt::Widget
@@ -75,6 +79,8 @@ class PyWindow(QWidget):
 
     def connectSlots(self):
         self.clickme.clicked.connect(self.onClickMe)
+
+        self.btnConnectPVServer.clicked.connect(self.connectPVServer)
 
     def setupPVHandlers(self):
         view = GetActiveView()
@@ -95,6 +101,22 @@ class PyWindow(QWidget):
 
             Show(self.sphere)
             Render()
+
+    @Slot()
+    def connectPVServer(self):
+        print servermanager.ActiveConnection
+        print GetActiveView()
+
+        conn = Connect("localhost", 11111)
+        servermanager.SetActiveConnection(conn)
+        serverViews = servermanager.GetRenderViews(conn)
+        # this technically doesn't have to be explictly set, since
+        # GetActiveView() already takes on the new view associated
+        # with the connection.
+        SetActiveView(serverViews[0])
+
+        print servermanager.ActiveConnection
+        print GetActiveView()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
