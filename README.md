@@ -129,14 +129,14 @@ This will install pyside2 and shiboken2 into
 
 ## pyside2-embed-paraview
 
-libfoo is the C++ library that wraps Paraview.
-foo is the C++/Shiboken2 configuration sub-project for generating the Python
-wrapper.
+libpvWidget is the C++ library that wraps Paraview.
+pvpyBinding is the C++/Shiboken2 configuration sub-project for generating the
+Python wrapper.
 
 After cloning this repository, build the project.
 **You will need to look over each and every path to make sure they correspond
-to the installations on your machine.** A sample build script by the name
-`libfoo/build.sh` is provided, but does not have the correct paths.
+to the installations on your machine.** A sample build script `build.sh.example`
+is provided, but must be edited before it will work.
 ```
 cd pyside2-embed-paraview/
 mkdir build/ && cd build/
@@ -164,25 +164,13 @@ cmake \
 make -j4
 ```
 
-If all compiles, you should have a `foo.so` located in `build/foo/foo.so`. That
-is your python module!
+If all compiles, you should have a `pypvBinding.so` located in
+`build/pypvBinding/pypvBinding.so`. That is your python module!
 
 # Running
 
-You will need to set a few environment variables. A sample run script is
-provided to demonstrate which variables need to be set.
-```
-export LD_LIBRARY_PATH=/opt/Qt5.9.1/5.9.1/gcc_64/lib
-export PARAVIEW_LIB=$HOME/ParaView/build/lib/
-export FOO_LIB=/path/to/pyside2-embed-paraview/build/foo/
-
-python app.py
-```
-
-Now you can run the app!
-```
-python app.py
-```
+A sample run script `run.sh.example` is provided. Please edit the file and set
+all paths that correspond to your setup.
 
 ## Issues
 
