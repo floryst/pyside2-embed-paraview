@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# edit the below paths for your setup.
+
+libpaths=(
+  /path/to/Qt5.9.1/5.9.1/gcc_64/lib
+)
+pythonpaths=(
+  /path/to/pyside2-embed-paraview/build/pypvBinding/
+  /path/to/ParaView-build-qt5.9.1/lib/
+  /path/to/ParaView-build-qt5.9.1/lib/site-packages/
+)
+
+printf -v libpaths ":%s" "${libpaths[@]}"
+printf -v pythonpaths ":%s" "${pythonpaths[@]}"
+
+export LD_LIBRARY_PATH="${libpaths:1}":${LD_LIBRARY_PATH}
+export PYTHONPATH="${pythonpaths:1}"
+
+source $HOME/py2env/bin/activate
+
+python app.py
