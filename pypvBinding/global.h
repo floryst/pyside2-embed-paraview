@@ -6,4 +6,4 @@
 #endif
 
 #include "pyside_global.h"
-#include <foo.h>
+#include <pvwidget.h>

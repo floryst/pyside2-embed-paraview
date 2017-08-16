@@ -3,22 +3,12 @@ import os
 import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-for path in [
-    # needed for vtkCommonCorePython module
-    os.environ.get('PARAVIEW_LIB'),
-    # paraview python lib
-    os.path.join(os.environ.get('PARAVIEW_LIB'), 'site-packages'),
-    # foo module
-    os.environ.get('FOO_LIB'),
-]:
-    sys.path.append(path)
-
 from collections import defaultdict
 
 from PySide2.QtCore import Slot
 from PySide2.QtWidgets import *
 from PySide2.QtGui import *
-import foo
+import pypvBinding
 
 import vtk
 from paraview.simple import *
@@ -70,10 +60,10 @@ class PyWindow(QWidget):
         self.layout.addWidget(self.btnConnectPVServer)
 
         # this takes ~2 sec to load...
-        self.fooWindow = foo.Goba.MyWindow()
+        self.widget = pypvBinding.PVWidget()
         # 0 == Qt::Widget
-        self.fooWindow.setWindowFlags(0)
-        self.layout.addWidget(self.fooWindow)
+        self.widget.setWindowFlags(0)
+        self.layout.addWidget(self.widget)
 
         self.setLayout(self.layout)
 

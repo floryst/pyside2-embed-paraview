@@ -1,8 +1,8 @@
-project(foobinding)
+project(python-paraview-binding)
 
 cmake_minimum_required(VERSION 2.6)
 
-set(LIBFOO_DIR ${CMAKE_SOURCE_DIR}/libfoo)
+set(LIBPVWIDGET_DIR ${CMAKE_SOURCE_DIR}/libpvWidget)
 
 if(CMAKE_HOST_UNIX)
  option(ENABLE_GCC_OPTIMIZATION "Enable specific GCC flags to optimization library size and performance. Only available on Release Mode" 0)
@@ -28,8 +28,8 @@ endif()
 # https://stackoverflow.com/questions/28252909/cmake-and-qt5-include-only-takes-one-argument
 #include(${QT_USE_FILE})
 
-add_subdirectory(libfoo)
-add_subdirectory(foo)
+add_subdirectory(libpvWidget)
+add_subdirectory(pypvBinding)
 
-# build libfoo before foo
-add_dependencies(foo libfoo)
+# build libpvWidget before pypvBinding
+add_dependencies(pypvBinding libpvWidget)

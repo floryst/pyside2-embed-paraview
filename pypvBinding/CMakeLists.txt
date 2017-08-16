@@ -1,4 +1,4 @@
-project(foo)
+project(pypvBinding)
 
 find_package(PythonLibs REQUIRED)
 find_package(Shiboken2 REQUIRED)
@@ -15,15 +15,14 @@ if (NOT GENERATOR)
  message(FATAL_ERROR "You need to specify GENERATOR variable (-DGENERATOR=value)")
 endif()
 
-set(foo_SRC
- ${CMAKE_CURRENT_BINARY_DIR}/foo/foo_module_wrapper.cpp
- ${CMAKE_CURRENT_BINARY_DIR}/foo/goba_wrapper.cpp
- ${CMAKE_CURRENT_BINARY_DIR}/foo/goba_mywindow_wrapper.cpp
+set(pypvBinding_SRC
+  ${CMAKE_CURRENT_BINARY_DIR}/pypvBinding/pypvbinding_module_wrapper.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/pypvBinding/pvwidget_wrapper.cpp
 )
 
 set(PYSIDE2_INC ${PYSIDE_DIR}/include/PySide2/)
 
-set(foo_INCLUDE_DIRECTORIES
+set(pypvBinding_INCLUDE_DIRECTORIES
  ${PYSIDE2_INC}
  ${PYSIDE2_INC}/QtGui
  ${PYSIDE2_INC}/QtWidgets
@@ -33,10 +32,10 @@ set(foo_INCLUDE_DIRECTORIES
  ${PYSIDE_INCLUDE_DIR}/QtCore
  ${QT_INCLUDE_DIR}
  ${QT_QTCORE_INCLUDE_DIR}
- ${LIBFOO_DIR}
+ ${LIBPVWIDGET_DIR}
 )
 
-set(foo_LINK_LIBRARIES
+set(pypvBinding_LINK_LIBRARIES
 # need Qt5::Core so that #include <QDebug> works.
 # https://stackoverflow.com/questions/28252909/cmake-and-qt5-include-only-takes-one-argument
 # The QDebug class documentation shows that qmake requires core:
@@ -49,24 +48,24 @@ set(foo_LINK_LIBRARIES
  ${SHIBOKEN_PYTHON_LIBRARIES}
  ${SHIBOKEN_LIBRARY}
  ${PYSIDE_LIBRARY}
- libfoo
+ libpvWidget
 )
 
-include_directories(foo ${foo_INCLUDE_DIRECTORIES})
-add_library(foo SHARED ${foo_SRC})
-set_property(TARGET foo PROPERTY PREFIX "")
-target_link_libraries(foo ${foo_LINK_LIBRARIES})
+include_directories(pypvBinding ${pypvBinding_INCLUDE_DIRECTORIES})
+add_library(pypvBinding SHARED ${pypvBinding_SRC})
+set_property(TARGET pypvBinding PROPERTY PREFIX "")
+target_link_libraries(pypvBinding ${pypvBinding_LINK_LIBRARIES})
 
 set(QT5_INC ${QT5_DIR}/include)
 
-add_custom_command(OUTPUT ${foo_SRC}
+add_custom_command(OUTPUT ${pypvBinding_SRC}
  COMMAND ${GENERATOR}
  --generator-set=shiboken --enable-parent-ctor-heuristic --enable-pyside-extensions --enable-return-value-heuristic --avoid-protected-hack
- --include-paths=${QT5_INC}:${QT5_INC}/QtCore:${QT5_INC}/QtWidgets:${LIBFOO_DIR}:${PYSIDE2_INC}:${PYSIDE2_INC}/QtGui:${PYSIDE_SRC}:/
+ --include-paths=${QT5_INC}:${QT5_INC}/QtCore:${QT5_INC}/QtWidgets:${LIBPVWIDGET_DIR}:${PYSIDE2_INC}:${PYSIDE2_INC}/QtGui:${PYSIDE_SRC}:/
  --typesystem-paths=${PYSIDE_TYPESYSTEMS}
  --output-directory=${CMAKE_CURRENT_BINARY_DIR}
- ${CMAKE_SOURCE_DIR}/foo/global.h
- ${CMAKE_CURRENT_SOURCE_DIR}/typesystem_foo.xml
+ ${CMAKE_SOURCE_DIR}/pypvBinding/global.h
+ ${CMAKE_CURRENT_SOURCE_DIR}/typesystem_pypvBinding.xml
  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
- COMMENT "Running generator for libfoo..."
+ COMMENT "Running generator for pypvBinding..."
  )

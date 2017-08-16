@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
-<typesystem package="foo">
+<typesystem package="pypvBinding">
   <load-typesystem name="typesystem_core.xml" generate="no" />
   <load-typesystem name="typesystem_gui_common.xml" generate="no" />
   <load-typesystem name="typesystem_widgets_common.xml" generate="no" />
-  <namespace-type name="Goba" generate="yes">
-    <object-type name="MyWindow" />
-  </namespace-type>
+  <object-type name="PVWidget" />
 </typesystem>

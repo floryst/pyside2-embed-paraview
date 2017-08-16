@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MyWindow</class>
- <widget class="QMainWindow" name="MyWindow">
+ <class>PVWidget</class>
+ <widget class="QMainWindow" name="PVWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -42,7 +42,6 @@
  </customwidgets>
 
  <resources>
-  <include location="resources.qrc"/>
   <include location="../ParaView3/ParaView/Qt/Components/Resources/pqComponents.qrc"/>
   <include location="../ParaView3/ParaView/Qt/Core/Resources/pqCore.qrc"/>
   <include location="../ParaView3/ParaView/Qt/Widgets/Resources/QtWidgets.qrc"/>
